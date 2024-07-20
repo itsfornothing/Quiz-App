@@ -24,3 +24,30 @@ Features
 3. Answer each question by clicking the True or False button.
 4. Your score will be updated and displayed after each question.
 5. After all quest
+
+## Files
+- `main.py`: The main entry point of the application.
+- `data.py`: Fetches quiz data from the OpenTDB API.
+- `question_model.py`: Defines the `Question` class used to model each quiz question.
+- `ui.py`: Creates the user interface using Tkinter.
+- `quiz_brain.py`: Contains the logic for handling the quiz.
+
+## Example
+```python
+from question_model import Question
+from data import question_data
+from quiz_brain import QuizBrain
+from ui import QuizInterface
+
+question_bank = []
+for question in question_data:
+    question_text = question["question"]
+    question_answer = question["correct_answer"]
+    new_question = Question(question_text, question_answer)
+    question_bank.append(new_question)
+
+quiz = QuizBrain(question_bank)
+quiz_ui = QuizInterface(quiz)
+
+print("You've completed the quiz")
+print(f"Your final score was: {quiz.score}/{quiz.question_number}")
